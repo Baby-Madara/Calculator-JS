@@ -99,7 +99,7 @@
             <button id="btn7"       class="num" onclick="appendValue('7')">7</button>
             <button id="btn8"       class="num" onclick="appendValue('8')">8</button>
             <button id="btn9"       class="num" onclick="appendValue('9')">9</button>
-            <button id="btnmult"    class="op" onclick="appendValue('*')">×</button>
+            <button id="btnmult"    class="op" onclick="appendValue('×')">×</button>
             <button id="btndiv"     class="op" onclick="appendValue('/')">/</button>
             
             
@@ -141,7 +141,9 @@
             try {
                 let expression = display.value
                     .replace(/\^/g, '**')
+                    .replace(/×/g, '**')
                     .replace(/pi/g, Math.PI)
+                    .replace(/e/g, Math.E)
                     .replace(/asin\(/g, 'Math.asin(')
                     .replace(/acos\(/g, 'Math.acos(')
                     .replace(/atan\(/g, 'Math.atan(')
@@ -161,8 +163,8 @@
         }
 
         function handleKeyboard(event) {
-            const allowedKeys = '0123456789+-*/().^%';
-            const additionalKeys = 'sctpeqSCT,lgL';
+            const allowedKeys = '0123456789+-/().^%';
+            const additionalKeys = 'sctpeqSCT,lgL*';
             if (event.key === 'Enter') {
                 calculateResult();
             } else if (event.key === 'Backspace') {
@@ -183,7 +185,7 @@
                 } else if (event.key === 'p') {
                     appendValue('pi');
                 } else if (event.key === 'e') {
-                    appendValue(String(Math.E));
+                    appendValue('e');
                 } else if (event.key === 'S') {
                     appendValue('asin(');
                 } else if (event.key === 'C') {
@@ -198,6 +200,8 @@
                     appendValue('log(');
                 } else if (event.key === ',') {
                     appendValue(',');
+                } else if (event.key === '*') {
+                    appendValue('×');
                 }
             }
             if (event.key === ' ' || event.key === 'Enter')
