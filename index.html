@@ -45,6 +45,14 @@
             gap: 5px;
         }
         button {
+            -khtml-user-select: none;
+            -o-user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            
+            
             margin: auto;
             width: 3.5rem;
             height: 3.5rem;
@@ -79,7 +87,7 @@
             <button id="btnlog"     class="op" onclick="appendValue('log10(')">log</button>
             <button id="btnlogxy"   class="op" onclick="appendValue('log(')">log (x,y)</button>
             <button id="btne"       class="op" onclick="appendValue('e')">e</button>
-            <button id="btnpi"      class="op" onclick="appendValue('pi')">π</button>
+            <button id="btnpi"      class="op" onclick="appendValue('π')">π</button>
             
             
             <button id="btns"       class="op" onclick="appendValue('sin(')">sin</button>
@@ -141,24 +149,25 @@
             try {
                 let expression = display.value
                     .replace(/\^/g, '**')
-                    .replace(/×/g, '**')
-                    .replace(/pi/g, Math.PI)
+                    .replace(/×/g, '*')
+                    .replace(/π/g, Math.PI)
                     .replace(/e/g, Math.E)
-                    .replace(/asin\(/g, 'Math.asin(')
-                    .replace(/acos\(/g, 'Math.acos(')
-                    .replace(/atan\(/g, 'Math.atan(')
+                    .replace(/(?<!Math\.)asin\(/g, 'Math.asin(')
+                    .replace(/(?<!Math\.)acos\(/g, 'Math.acos(')
+                    .replace(/(?<!Math\.)atan\(/g, 'Math.atan(')
                     .replace(/(?<!Math\.a)sin\(/g, 'Math.sin(')
                     .replace(/(?<!Math\.a)cos\(/g, 'Math.cos(')
                     .replace(/(?<!Math\.a)tan\(/g, 'Math.tan(')
-                    .replace(/ln\(/g,               'Math.log(')
-                    .replace(/log10\(/g,            'Math.log10(')
-                    .replace(/log\(/g,              'logBase(')
+                    .replace(/(?<!Math\.)ln\(/g,               'Math.log(')
+                    .replace(/(?<!Math\.)log10\(/g,            'Math.log10(')
+                    .replace(/(?<!Math\.)log\(/g,              'logBase(')
                     .replace(/sqrt\(/g, 'Math.sqrt(')
                     .replace(/\%/g, '*0.01');
                 console.log(expression);
                 display.value = eval(expression);
             } catch (error) {
                 display.value = 'Error';
+                console.log(expression);
             }
         }
 
@@ -183,7 +192,7 @@
                 } else if (event.key === 't') {
                     appendValue('tan(');
                 } else if (event.key === 'p') {
-                    appendValue('pi');
+                    appendValue('π');
                 } else if (event.key === 'e') {
                     appendValue('e');
                 } else if (event.key === 'S') {
