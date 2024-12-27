@@ -271,12 +271,14 @@
         });
         
         // Remove hover effect after key is released
-        document.addEventListener('keyup', function(event) {
+        const unHoldFunc = function(event) {
             if (keyMap[event.key]) {
                 let button = document.getElementById(keyMap[event.key]);
                 button.classList.remove('hovered');
             }
-        });
+        }
+        // document.addEventListener('unhold', unHoldFunc);
+        document.addEventListener('keyup touchend', unHoldFunc);
 
 
 
