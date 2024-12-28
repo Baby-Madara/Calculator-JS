@@ -277,8 +277,9 @@
                 button.classList.remove('hovered');
             }
         }
-        // document.addEventListener('unhold', unHoldFunc);
-        document.addEventListener('keyup touchend', unHoldFunc);
+        document.addEventListener('keyup', unHoldFunc);
+        // document.addEventListener('input', unHoldFunc);
+        // document.addEventListener('touchend', unHoldFunc);
 
 
 
